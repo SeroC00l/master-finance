@@ -1,5 +1,8 @@
 import Image from "next/image";
-import Logo from "../../../public/logo.svg";
+import Logo from "/public/logo.svg";
+import Password from "/public/password.svg";
+import Email from "/public/email.svg";
+import Footer from "../components/Footer";
 
 function SingInPage() {
   return (
@@ -18,7 +21,7 @@ function SingInPage() {
           <form className="flex flex-col p-3">
             <label className="border-b-4 border-textColor mb-9 cursor-pointer">
               <span className="ml-3 absolute text-textColor flex gap-4">
-                <img src="/email.svg" />
+                <Image src={Email} alt="email" />
                 <p>Email</p>
               </span>
               <input
@@ -29,7 +32,7 @@ function SingInPage() {
             </label>
             <label className="border-b-4 border-textColor mb-9 cursor-pointer">
               <span className="ml-3 absolute text-textColor flex gap-4">
-                <img src="/password.svg"></img>
+                <Image src={Password} alt="password" />
                 <p>Password</p>
               </span>
               <input
@@ -56,11 +59,7 @@ function SingInPage() {
           </form>
         </div>
       </div>
-      <footer className="flex mt-16 mb-2 md:mb-5 gap-4 md:gap-14 w-full justify-center">
-        <img className="h-14 sm:h-19" src="/facebook.svg" alt="facebook" />
-        <img className="h-14 sm:h-19" src="/instagram.svg" alt="instagram" />
-        <img className="h-14 sm:h-19" src="/twitter.svg" alt="twitter" />
-      </footer>
+      <Footer />
     </main>
   );
 }
