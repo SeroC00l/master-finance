@@ -12,7 +12,7 @@ function SingInPage() {
       </header>
       <div className="flex flex-col w-[400px] mx-auto md:bg-secondary rounded-[50px] p-6">
         <div className="flex justify-center w-full">
-          <h2 className="text-textColor text-4xl mt-10">LOGIN</h2>
+          <h2 className="text-textColor text-4xl mt-10">SING IN</h2>
         </div>
         <div>
           <form className="flex flex-col p-3">
@@ -51,7 +51,7 @@ function SingInPage() {
               type="submit"
               className="text-secondary border-2 border-textColor py-3 bg-golden rounded-2xl font-extrabold"
             >
-              LOGIN
+              SING IN
             </button>
           </form>
         </div>
