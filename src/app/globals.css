@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body, html {
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -27,4 +27,8 @@ body {
   #home-page {
     clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
   }
+}
+
+input:-webkit-autofill {
+  @apply bg-secondary !important;
 }
