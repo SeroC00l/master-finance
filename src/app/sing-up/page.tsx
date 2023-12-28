@@ -5,13 +5,17 @@ import Password from "/public/password.svg";
 import Email from "/public/email.svg";
 import Footer from "../components/Footer";
 import { useState } from "react";
-import supabase from "../supabase/client";
+import supabase from "../lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { SignUp } from "../lib/auth-functions";
 
 function SingUpPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
+  const [Error, setError] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -32,25 +36,22 @@ function SingUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (password !== retypePassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            first_name: name,
-          },
-        },
-      });
+      const result = await SignUp({ email, password, name });
+      const { error } = JSON.parse(result);
 
       if (error) {
-        console.error(error.message);
-      } else {
-        console.log("Usuario registrado exitosamente:", data);
-        // Puedes redirigir a la página de inicio de sesión u otra página
+        setError(error);
       }
+      router.push("/Home");
     } catch (error) {
-      console.error("Error en el registro:", error.message);
+      console.error("Error during sign in:", error.message);
+      // Puedes manejar el error de inicio de sesión aquí
     }
   };
 
@@ -67,7 +68,7 @@ function SingUpPage() {
           <h1 className="text-golden text-5xl">Master Finance</h1>
         </a>
       </header>
-      <div className="flex flex-col w-[400px] mx-auto md:bg-secondary rounded-[50px] p-6">
+      <section className="flex flex-col w-[400px] mx-auto md:bg-secondary rounded-[50px] p-6">
         <div className="flex justify-center w-full">
           <h2 className="text-textColor text-4xl mt-10">SIGN UP</h2>
         </div>
@@ -133,6 +134,9 @@ function SingUpPage() {
                 className="w-full bg-secondary px-10 text-textColor  border-none outline-none"
               />
             </label>
+            <a href="/sing-in" className="text-textColor text-center mb-4">
+              Alredy have an account? Sing In
+            </a>
             <button
               type="submit"
               className="text-secondary border-2 border-textColor py-3 bg-golden rounded-2xl font-extrabold"
@@ -141,7 +145,10 @@ function SingUpPage() {
             </button>
           </form>
         </div>
-      </div>
+      </section>
+      {Error && (
+        <p className="text-red-500 text-sm mb-3">{Error}</p>
+      )}
       <Footer />
     </main>
   );

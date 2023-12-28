@@ -2,30 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 @media (min-width: 768px) {
+  body {
+    overflow: hidden;
+  }
   nav {
     clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%);
   }
   #logo {
     background-color: #ffffff00;
   }
+  #home-page {
+    clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+  }
 }
 
 @media (max-width: 768px) {
   nav.hidden {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-}
-
-@media (min-width: 768px) {
-  #home-page {
-    clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
   }
 }
 

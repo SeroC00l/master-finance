@@ -1,19 +1,28 @@
+import { redirect } from "next/navigation";
+import { UserSession } from "./lib/auth-functions";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-export default function Home() {
+export default async  function LandingPage() {
+
+  const { data } = await UserSession()
+
+  if(data.session){
+    return redirect("/Home")
+  }
+
   return (
     <>
       <Header />
       <main
         id="home-page"
-        className="bg-darkBlue z-10 top-0 flex flex-col md:w-7/12 h-screen"
+        className="bg-darkBlue z-10 top-0 flex flex-col md:w-7/12 h-full"
       >
-        <div className="text-textColor flex flex-col md:mt-36 mt-[267px] md:mr-52">
+        <section className="text-textColor flex flex-col md:mt-36 mt-[267px] md:mr-52">
           <h2 className="text-4xl text-center lg:text-left sm:text-6xl w-full md:ml-12">
             Welcome
           </h2>
-          <p className="text-xl mb-4 sm:mb-10 p-12">
+          <p className="text-xl mb-4 sm:mb-10 p-12 text-pretty">
             Welcome to our personal finance app! We're excited to help you
             achieve your financial goals and gain control of your money. With
             our app, you can easily track your income and expenses, set savings
@@ -27,7 +36,7 @@ export default function Home() {
           >
             Get started
           </a>
-        </div>
+        </section>
         <Footer />
       </main>
     </>

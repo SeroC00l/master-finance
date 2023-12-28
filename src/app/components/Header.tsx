@@ -22,7 +22,7 @@ function Header() {
               Master Finance
             </h1>
           </a>
-          <button onClick={handleClick} className="md:hidden">
+          <button onClick={handleClick} className="md:hidden mr-4">
             <img src="/menu.svg" alt="menu" className="w-12 mr-3" />
           </button>
         </div>
